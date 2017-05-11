@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 7</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+
+//Ejercicio 7, plantilla obtenida de https://www.w3schools.com/php/php_ajax_php.asp
+//Originalmente esta en JavaScript y con una base de datos rustica
+//Se modifico por Jquery, y Base de Datos mysql
+
+$(document).ready(function(){
+
+  $('#ingresar').keyup(function(){ //La funcion se ejecuta al levantar el dedo de una tecla
+
+    var str = $(this).val();
+
+    if (str.length == 0){
+      $("#txtSugerencias").text(""); // Si no hay valor en el imput borro lo que hay en sugerencias.
+
+    } else {
+      $.get("gethint.php",{letra:str }, function(respuesta){  //Pasa la letra como argumento
+        $("#txtSugerencias").html(respuesta); //Ingresamos la respuesta en el span Sugerencias
+      });
+      /*$.ajax({
+        url: 'gethint.php',
+        type: 'GET',
+        async: true,
+        data: {letra:str},
+        success:function(response){
+          $("#txtSugerencias").html(response);
+        }
+      });*/
+    }
+
+  });
+
+});
+
+
+</script>
+</head>
+<body>
+  <div class="container">
+    <h3>Ejercicio 7</h3>
+    <hr>
+    <h4>Ingresar un nombre de Estado:</h4>
+  <br>
+    <form>
+    <div class="row">
+      <div class="form-group">
+        <label for="estado" class="col-md-1 control-label">Estado:</label>
+        <div class="col-md-2">
+            <input type="text" id= "ingresar" class="form-control">
+        </div>
+      </div>
+    </div>
+
+<div class="row">
+  <div class="form-group">
+    <label for="estado" class="col-md-1 control-label">Sugerencias:</label>
+    <div class="col-md-11">
+           <span id="txtSugerencias"></span>
+    </div>
+  </div>
+</div>
+
+
+</form>
+    <hr>
+    <a href="presentacion.html" class="btn btn-info">Volver al inicio</a>
+
+  </div>
+
+
+
+</body>
+</html>

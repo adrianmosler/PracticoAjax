@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--Jara-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ejercicio 3</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/tabs.css" rel="stylesheet"><!-- Copiado de  https://www.w3schools.com/howto/howto_js_tabs.asp-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+
+function mostrarContenido(numero){
+
+
+$.get("obtenerContenido.php",{id:numero }, function(respuesta){
+
+$('.tablinks').removeClass("active");       // Quito la clase active a todos los tabs
+$('.tabcontent').css('display','none');     // Escondo todos los div con contenido
+
+      $('#' + numero).html(respuesta);                      //Inserto la respuesta en el tabcontent
+      $('#' + numero).css('display', 'block');              //Y la hago visible
+      $('button[nombreid="'+numero+'"]').addClass("active"); //Hago el tab clickeado activo
+
+  });
+}
+
+
+
+$(document).ready(function(){
+    mostrarContenido(1);//muestra el contenido de javascript al cargar la pagina
+
+
+    $(".tablinks").click(function(){
+
+        var numero = $(this).attr('nombreid');
+         //$(this) Obtenido de http://stackoverflow.com/questions/9481490/jquery-click-get-attribute-from-divs-with-the-same-class
+        mostrarContenido(numero);
+
+
+		/*$.get("obtenerContenido.php",{id:numero }, function(respuesta){
+
+			$('.tablinks').removeClass("active");       // Quito la clase active a todos los tabs
+			$('.tabcontent').css('display','none');     // Escondo todos los div con contenido
+
+            $('#' + numero).html(respuesta);                      //Inserto la respuesta en el tabcontent
+            $('#' + numero).css('display', 'block');              //Y la hago visible
+            $('button[nombreid="'+numero+'"]').addClass("active"); //Hago el tab clickeado activo
+
+        });*/
+
+    });
+});
+</script>
+</head>
+<body>
+
+
+  <div class="container">
+<h3>Ejercicio 3</h3>
+<hr>
+
+<!-- Copiado de  https://www.w3schools.com/howto/howto_js_tabs.asp-->
+<div class="tab">
+  <button class="tablinks" nombreid="1">Ajax</button>
+  <button class="tablinks" nombreid="2">Javascript</button>
+  <button class="tablinks" nombreid="3">Php</button>
+</div>
+
+<div id="1" class="tabcontent">
+
+</div>
+
+<div id="2" class="tabcontent">
+
+</div>
+
+<div id="3" class="tabcontent">
+
+</div>
+<hr>
+<a href="presentacion.html" class="btn btn-info">Ir al inicio</a>
+  </div>
+
+</body>
+</html>
